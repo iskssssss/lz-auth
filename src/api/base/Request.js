@@ -20,6 +20,14 @@ export function POST(url, body) {
 
 export function GET(url, params) {
     return new Promise((resolve, reject) => {
+        if (params == null || params === '') {
+            one.get(url).then((response) => {
+                resolve(response)
+            }).catch((reason) => {
+                reject(reason)
+            })
+            return
+        }
         one.get(url, params).then((response) => {
             resolve(response)
         }).catch((reason) => {

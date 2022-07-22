@@ -1,14 +1,15 @@
 const { defineConfig } = require('@vue/cli-service')
+const webpack = require("webpack")
+const path = require("path")
+
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
-  // 配置服务器
-  devServer: {
-    // port: 6661,
-    // open: true,
-    // https: false,
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        Log: [path.resolve(__dirname, './src/tool/console/Log.js'), 'default'], // 定义的全局函数类
+      })
+    ]
   }
 })

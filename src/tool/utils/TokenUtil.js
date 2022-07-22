@@ -7,15 +7,15 @@ export function checkToken() {
 }
 
 export function getToken () {
-    return getCookie(TOKEN_KEY)
+    return getCookie(TOKEN_COOKIE_KEY)
 }
 
 export function setToken (token) {
-    return setCookie(TOKEN_KEY, token)
+    return setCookie(TOKEN_COOKIE_KEY, token)
 }
 
 export function removeToken () {
-    return removeCookie(TOKEN_KEY)
+    return removeCookie(TOKEN_COOKIE_KEY)
 }
 
 export function getDataFromJwtToken (token) {

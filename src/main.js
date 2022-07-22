@@ -3,7 +3,6 @@ import router from '@/router'
 import App from './App.vue'
 
 
-
-createApp(App)
+const vue = createApp(App)
     .use(router)
-    .mount('#app')
+    .mount('#app');

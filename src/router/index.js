@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 import {checkToken} from "@/tool/utils/TokenUtil";
 
 export const routes = [
@@ -24,9 +24,9 @@ export const routes = [
         }
     },
 ]
+
 const router = createRouter({
-    // history: createWebHashHistory(),  // hash路由模式
-    history: createWebHistory(),  // history路由模式
+    history: createWebHistory(),
     routes
 })
 
@@ -42,8 +42,8 @@ router.beforeEach((to, from, next) => {
         })
         return
     }
-    if (path === '/logout') {
-        next()
+    if (path === '/login' && isToken === false) {
+        next({path: '/'})
         return
     }
     next()

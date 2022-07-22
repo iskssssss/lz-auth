@@ -18,3 +18,11 @@ export function login(loginInfo) {
 export function logout() {
     return POST(BASE_INTERFACE + "/logout/logout.do", null);
 }
+
+/**
+ * 获取当前登录用户信息
+ * @returns {Promise<unknown>} 响应结果
+ */
+export function userInfo() {
+    return GET(BASE_INTERFACE + "/userInfo", null);
+}

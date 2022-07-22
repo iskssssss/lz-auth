@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {logout} from "@/api/AuthUtil"
+import {logout} from "@/api/AuthApi"
 import {removeToken} from "@/tool/utils/TokenUtil"
 
 export default {
@@ -19,12 +19,12 @@ export default {
   mounted() {
     logout().then(result => {
       const {code, data, message} = result;
-      if (code !== 200 || message !== 'success') {
+      if (code !== 200) {
         return
       }
       removeToken()
+      localStorage.removeItem('userInfo');
       const {redirect} = this.$route.query
-      console.info(redirect)
       this.$router.push({
         path: '/login',
         query: {redirect: redirect}

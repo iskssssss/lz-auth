@@ -8,21 +8,28 @@ export function getQueryMap(url) {
         return {}
     }
     const queryMap = {}
+    let isValue = false
     const length = url.length;
-    const params = url.substring(paramsStartIndex + 1, length)
-    const paramList = params.split('&')
-    for (let param of paramList) {
-        const split = param.split('=');
-        const key = split[0]
-        let value = ''
-        for (let i = 1; i < split.length; i++) {
-            if (i === split.length - 1) {
-                value = value + split[i]
+    let keyTemp = ''
+    let valueTemp = ''
+    for (let i = paramsStartIndex + 1; i < length; i++) {
+        const t = url.charAt(i);
+        switch (t) {
+            case "&":
+                queryMap[keyTemp] = valueTemp;
+                keyTemp = valueTemp = ''
+                isValue = false
                 continue
-            }
-            value = value + split[i] + "="
+            case "=":
+                isValue = true
+                continue
+            default:
+                if (isValue === false) {
+                    keyTemp += t
+                    continue
+                }
+                valueTemp += t
         }
-        queryMap[key] = value
     }
     return queryMap;
 }

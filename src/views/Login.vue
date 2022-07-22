@@ -4,21 +4,14 @@
     width: 100%;
     align-items: center;
     display: flex;">
-    <div style="
-        max-width: 600px;
-        min-width: 300px;
-        min-height: 200px;
+    <div style=" max-width: 600px; min-width: 300px; min-height: 200px;
     padding: 24px;
     margin: auto;
     border-radius: 8px;
     border: 2px solid #ffffff47;
     background: #ffffff47;
-    color: #000;
-    position: relative;
-">
-      <p style="    margin: 0;
-    font-size: 24px;
-    text-align: center;">单点登录</p>
+    color: #000; position: relative;">
+      <p style="margin: 0; font-size: 24px; text-align: center;">登录</p>
       <div class="form-item">
         <p style="width: 56px">用户名:</p>
         <label for="username"></label>
@@ -38,7 +31,7 @@
 </template>
 
 <script>
-import {login} from "@/api/AuthUtil"
+import {login, userInfo} from "@/api/AuthApi"
 import {setToken} from "@/tool/utils/TokenUtil"
 import {getQueryMap} from "@/tool/utils/UrlUtil";
 
@@ -58,19 +51,21 @@ export default {
       this.loginErrorMessage = null
       login(this.loginForm).then(result => {
         const {code, data, message} = result;
-        if (code !== 200 || message !== 'success') {
+        if (code !== 200) {
           this.loginErrorMessage = message
           console.error(result)
           return
         }
         setToken(data)
-        let {redirect} = this.$route.query;
-        redirect = redirect == null ? '/' : redirect;
-        const queryMap = getQueryMap(redirect)
-        console.info(queryMap)
-        this.$router.push({
-          path: redirect,
-          query: queryMap
+        userInfo().then(result => {
+          localStorage.setItem('userInfo', JSON.stringify(result['data']))
+          let {redirect} = this.$route.query;
+          redirect = redirect == null ? '/' : redirect;
+          const queryMap = getQueryMap(redirect)
+          this.$router.push({
+            path: redirect,
+            query: queryMap
+          })
         })
       }).catch(error => {
         console.info(error);
