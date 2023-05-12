@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <h1>
+  <div style="position: absolute; left: 0; top: 0;">
+    <h1 style="color: #d2d2d2;">
       登出中...
-
     </h1>
   </div>
 </template>

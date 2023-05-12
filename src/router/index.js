@@ -11,6 +11,7 @@ export const routes = [
     },
     {
         path: '/login',
+        name: '登录',
         component: () => import('@/views/Login'),
         meta: {
             auth: false

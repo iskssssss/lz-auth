@@ -4,13 +4,12 @@
     width: 100%;
     align-items: center;
     display: flex;">
-    <div style=" max-width: 600px; min-width: 300px; min-height: 200px;
-    padding: 24px;
-    margin: auto;
-    border-radius: 8px;
-    border: 2px solid #ffffff47;
-    background: #ffffff47;
-    color: #000; position: relative;">
+    <header style="position: absolute; top: 0; right: 0; left: 0; height: 50px; display: flex;">
+      <span style="color: #d2d2d2; font-size: 22px; margin: auto 12px;">📖 编程日志</span>
+    </header>
+    <div style="max-width: 600px; min-width: 300px; min-height: 200px;
+            padding: 24px; margin: auto; border-radius: 8px;
+            border: 2px solid #ffffff47; background: #ffffff47; color: #000; position: relative;">
       <p style="margin: 0; font-size: 24px; text-align: center;">登录</p>
       <div class="form-item">
         <p style="width: 56px">用户名:</p>
@@ -27,6 +26,12 @@
       </div>
       <p style="color: red; margin: 0;" v-if="loginErrorMessage != null">{{loginErrorMessage}}</p>
     </div>
+    <footer class="l-footer" style="position: absolute; bottom: 0; right: 0; left: 0; height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;">
+      <a  style="text-decoration: none; color: #d2d2d2;" href="https://beian.miit.gov.cn" target="_blank">浙ICP备20016905号-1</a>
+    </footer>
   </div>
 </template>
 
@@ -41,8 +46,8 @@ export default {
     return {
       loginErrorMessage: null,
       loginForm: {
-        username: 'admin',
-        password: '123456',
+        username: '',
+        password: '',
       }
     }
   },
@@ -82,6 +87,10 @@ input {
   border: 1px solid #fff;
   padding: 4px;
   border-radius: 4px;
+}
+
+.l-footer a:hover {
+  color: #a9a9a9 !important;
 }
 
 .form-item {
